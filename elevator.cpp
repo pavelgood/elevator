@@ -168,13 +168,13 @@ void ElevatorPool::add(const STask &p)
 
     std::lock_guard<std::mutex> _(m_mutex);
 
-    // Check whether "button" has already pushed.
+    // Check whether "button" has already been pushed.
     // Take under consideration an interactive tasks that
     // shouldn't be overwritten due to interactive logic.
     bool ignore = false;
     auto it = m_queue.begin();
     while (it != m_queue.end()) {
-        if ((*it)->location == p->location) // if button already pushed
+        if ((*it)->location == p->location)
         {
             // Do not replace interactive!
             if(dynamic_cast<TaskInteractive*>((*it).get())==nullptr)
